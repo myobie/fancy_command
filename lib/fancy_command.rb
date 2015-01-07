@@ -6,6 +6,14 @@ module FancyCommand
     Command.new(string, **opts, &blk)
   end
 
+  def self.defaults
+    @defaults ||= {}.freeze
+  end
+
+  def self.defaults=(new_defaults)
+    @defaults = new_defaults.freeze
+  end
+
   def run(string, **opts, &blk)
     command(string, **opts, &blk).()
   end

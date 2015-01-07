@@ -16,18 +16,20 @@ module FancyCommand
 
     attr_reader :string, :accum, :in, :out, :err, :output, :status, :pid
 
-    def initialize(string, must_succeed: false, **opts)
+    def initialize(string, **opts)
+      opts.merge! FancyCommand.defaults
+
       @string = string
       @verbose = opts.fetch(:verbose, false)
+      @must_succeed = opts.fetch(:must_succeed, false)
       @accum = opts.fetch(:accum) { [] }
       @in = opts[:in]
       @output = ""
+      @output_mutex = Mutex.new
       @out = nil
       @err = nil
       @status = nil
       @pid = nil
-      @must_succeed = must_succeed
-      @output_mutex = Mutex.new
 
       if block_given?
         append_in yield
