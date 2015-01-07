@@ -87,7 +87,7 @@ Another example to show off is:
 require 'fancy_command'
 include FancyCommand
 
-# get the date
+# get the current month
 
 command = run("date") | "awk '{ print $2 }'"
 puts command.output
