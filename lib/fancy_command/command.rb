@@ -80,7 +80,7 @@ module FancyCommand
       [@out, @err, @output].each(&:freeze)
 
       if must_succeed? && !success?
-        raise Failed, string, status.exitstatus, output
+        raise Failed, command: string, status: status.exitstatus, output: output
       end
 
       self
