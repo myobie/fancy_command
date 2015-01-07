@@ -17,7 +17,7 @@ module FancyCommand
     attr_reader :string, :accum, :in, :out, :err, :output, :status, :pid
 
     def initialize(string, **opts)
-      opts.merge! FancyCommand.defaults
+      opts = FancyCommand.defaults.merge(opts)
 
       @string = string
       @verbose = opts.fetch(:verbose, false)
